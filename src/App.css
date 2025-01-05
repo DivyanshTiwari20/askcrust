@@ -1,0 +1,154 @@
+/* General App Styles */
+.app-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.app-container.dark {
+  background-color: #181818;
+  color: #eaeaea;
+}
+
+.app-wrapper {
+  width: 90%;
+  max-width: 600px;
+  height: 80%;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.app-wrapper.dark {
+  background-color: #242526;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+/* Chat Header */
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #0078d7;
+  color: white;
+  max-width: 90%;
+}
+
+.chat-header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+/* Chat Container */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 60px);
+  background-color: #fafafa;
+}
+
+.chat-container.dark {
+  background-color: #1f1f1f;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.chat-message {
+  margin-bottom: 12px;
+}
+
+.user-message {
+  text-align: right;
+}
+
+.bot-message {
+  text-align: left;
+}
+
+.message-content {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 18px;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.user-message .message-content {
+  background-color: #0078d7;
+  color: white;
+}
+
+.bot-message .message-content {
+  background-color: #e1e1e1;
+  color: #333;
+}
+
+/* Chat Input */
+.chat-input {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  background-color: #f7f7f7;
+}
+
+.chat-input.dark {
+  background-color: #2e2e2e;
+  border-top: 1px solid #444;
+}
+
+.input-field {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: #0078d7;
+}
+
+.send-button {
+  margin-left: 10px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #0078d7;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.send-button:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
+}
+
+.markdown-container {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+.markdown-container h1, h2, h3 {
+  color: #333;
+}
+.markdown-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+.markdown-container a:hover {
+  text-decoration: underline;
+}

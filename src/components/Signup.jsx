@@ -19,13 +19,13 @@ const Signup = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/auth/register', formData);
+      const res = await axios.post('http://localhost:5000/api/auth/register', formData);
       localStorage.setItem('token', res.data.token);
       // Redirect to chat page or dashboard
     } catch (err) {
       if (err.response) {
         console.error(err.response.data); // Log server errors
-        alert(err.response.data.msg || 'An error occurred'); // Display error to the user
+        alert(err.response.data.msg || 'An error occurred. Please try again later.'); // Display error to the user
       } else {
         console.error(err.message); // Handle other errors
         alert('Unable to connect to the server');

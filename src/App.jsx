@@ -3,12 +3,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import ChatContainer from './components/ChatContainer';
 import ThemeToggle from './components/ThemeToggle';
 import { getBotResponse } from './utils/chatbot';
-import { useTheme } from './hooks/useTheme';
+import { useTheme, ThemeProvider } from './hooks/useTheme'; // Import ThemeProvider here
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
-
 
 function PrivateRoute({ element, isAuthenticated }) {
   return isAuthenticated ? element : <Navigate to="/login" />;
@@ -19,7 +18,7 @@ function ChatApp() {
   const [messages, setMessages] = useState([
     {
       id: '1',
-      content: 'Hello! I\'m here to help you with questions about Crustdata APIs. What would you like to know?',
+      content: "Hello! I'm here to help you with questions about Crustdata APIs. What would you like to know?",
       sender: 'bot',
       timestamp: new Date(),
     },
@@ -78,23 +77,25 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Replace with actual authentication logic
 
   return (
-    <Router>
-      <Routes>
-      <Route path="/" element={<ChatApp />} /> {/* Default route */}
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-        <Route
-          path="/chat"
-          element={
-            <PrivateRoute 
-              element={<ChatApp />} 
-              isAuthenticated={isAuthenticated} 
-            />
-          }
-        />
-        {/* Other routes can be added here */}
-      </Routes>
-    </Router>
+    <ThemeProvider> {/* Wrap your application in ThemeProvider */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<ChatApp />} /> {/* Default route */}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+          <Route
+            path="/chat"
+            element={
+              <PrivateRoute 
+                element={<ChatApp />} 
+                isAuthenticated={isAuthenticated} 
+              />
+            }
+          />
+          {/* Other routes can be added here */}
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
 

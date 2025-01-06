@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
       <div className="container">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/"style={{ color: 'white' }}>
           Crustdata ChatApp
         </Link>
         <button
@@ -21,19 +21,20 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/signup">
-                Sign Up
-              </Link>
-            </li>
-          </ul>
-        </div>
+  <ul className="navbar-nav ms-auto">
+    <li className="nav-item" style={{ color: 'white' }}>
+      <Link className="nav-link" to="/login" style={{ color: 'white' }}>
+        Login
+      </Link>
+    </li>
+    <li className="nav-item" style={{ color: 'white' }}>
+      <Link className="nav-link" to="/signup" style={{ color: 'white' }}>
+        Sign Up
+      </Link>
+    </li>
+  </ul>
+</div>
+
       </div>
     </nav>
   );

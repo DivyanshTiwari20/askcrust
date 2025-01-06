@@ -152,3 +152,25 @@
 .markdown-container a:hover {
   text-decoration: underline;
 }
+
+/* styles.css */
+.container {
+  max-width: 400px; /* Adjust maximum width */
+}
+
+h2 {
+  color: #007bff; /* Change heading color */
+}
+
+.form-control {
+  border-radius: 0.25rem; /* Rounded corners for inputs */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Custom button color */
+  border-color: #007bff; /* Border color for button */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}

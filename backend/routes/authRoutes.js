@@ -1,13 +1,11 @@
 const express = require('express');
 const { check } = require('express-validator');
 const authController = require('../controllers/authController');
-const authMiddleware = require('../middleware/authMiddleware'); // Import the middleware
+const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-
-
-// Registration Route with log for debugging
+// Registration Route
 router.post(
   '/register',
   [
@@ -15,10 +13,6 @@ router.post(
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Password must be 6 or more characters').isLength({ min: 6 }),
   ],
-  (req, res, next) => {
-    console.log('Register route hit');
-    next();  // Proceed to the next middleware, which is authController.register
-  },
   authController.register
 );
 
@@ -34,8 +28,7 @@ router.post(
 
 // Protected Route Example
 router.get('/protected', authMiddleware, (req, res) => {
-  res.json({ message: 'This is a protected route!', user: req.user });
+  res.json({ msg: 'This is a protected route!', user: req.user });
 });
-
 
 module.exports = router;

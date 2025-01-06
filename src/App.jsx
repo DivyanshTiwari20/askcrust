@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import ChatContainer from './components/ChatContainer';
 import ThemeToggle from './components/ThemeToggle';
 import { getBotResponse } from './utils/chatbot';
 import { useTheme } from './hooks/useTheme';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import Navbar from './components/Navbar';
 
-function App() {
+
+function PrivateRoute({ element, isAuthenticated }) {
+  return isAuthenticated ? element : <Navigate to="/login" />;
+}
+
+function ChatApp() {
   const { theme, toggleTheme } = useTheme();
   const [messages, setMessages] = useState([
     {
@@ -40,6 +49,7 @@ function App() {
 
   return (
     <div className={`min-vh-100 ${theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'}`}>
+      <Navbar />
       <div className="container py-5">
         <div className="row justify-content-center">
           <div className="col-md-8">
@@ -61,6 +71,30 @@ function App() {
         </div>
       </div>
     </div>
+  );
+}
+
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Replace with actual authentication logic
+
+  return (
+    <Router>
+      <Routes>
+      <Route path="/" element={<ChatApp />} /> {/* Default route */}
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        <Route
+          path="/chat"
+          element={
+            <PrivateRoute 
+              element={<ChatApp />} 
+              isAuthenticated={isAuthenticated} 
+            />
+          }
+        />
+        {/* Other routes can be added here */}
+      </Routes>
+    </Router>
   );
 }
 

@@ -1,26 +1,30 @@
 const Message = require('../models/Message');
 
-// Send a new message
+// Send Message
 exports.sendMessage = async (req, res) => {
+  const { text } = req.body;
+
   try {
-    const { content } = req.body;
     const message = new Message({
-      sender: req.user.userId,
-      content,
+      user: req.user.id,
+      text,
     });
+
     await message.save();
-    res.status(201).json({ message: 'Message sent', data: message });
-  } catch (error) {
-    res.status(400).json({ error: 'Failed to send message' });
+    res.json(message);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 };
 
-// Get message history
-exports.getMessages = async (req, res) => {
+// Get User Messages
+exports.getUserMessages = async (req, res) => {
   try {
-    const messages = await Message.find().populate('sender', 'username');
+    const messages = await Message.find({ user: req.user.id }).sort({ timestamp: -1 });
     res.json(messages);
-  } catch (error) {
-    res.status(400).json({ error: 'Failed to retrieve messages' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 };

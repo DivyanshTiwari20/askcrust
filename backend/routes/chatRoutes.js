@@ -1,10 +1,15 @@
 const express = require('express');
-const { sendMessage, getMessages } = require('../controllers/chatController');
-const authMiddleware = require('../middleware/authMiddleware');
+const { check } = require('express-validator');
+const chatController = require('../controllers/chatController');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-router.post('/send', authMiddleware, sendMessage);
-router.get('/history', authMiddleware, getMessages);
+// Send Message Route
+router.post(
+  '/send',
+  [auth, [check('text', 'Message text is required').not().isEmpty()]],
+  chatController.sendMessage
+);
 
-module.exports = router;
+// Get User Messages Route

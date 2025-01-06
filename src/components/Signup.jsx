@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
+import Navbar from './Navbar';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const Signup = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('api/auth/register', formData);
+      const res = await axios.post('/api/auth/register', formData);
       localStorage.setItem('token', res.data.token);
       // Redirect to chat page or dashboard
     } catch (err) {
@@ -33,6 +34,8 @@ const Signup = () => {
   };
 
   return (
+  <>
+      <Navbar />
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6 col-lg-4">
@@ -84,6 +87,7 @@ const Signup = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

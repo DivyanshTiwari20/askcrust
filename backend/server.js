@@ -5,14 +5,16 @@ const authRoutes = require('./routes/authRoutes');
 const chatRoutes = require('./routes/chatRoutes'); // Added chat routes
 const cors = require('cors');
 
+// Load environment variables
+dotenv.config(); 
+
+// Create an instance of the Express app
+const app = express();
+
 // Enable CORS for all routes
 app.use(cors());
 
-dotenv.config(); // Load environment variables
-
-const app = express();
-
-// Middleware
+// Middleware to parse JSON requests
 app.use(express.json());
 
 // Connect to MongoDB
@@ -21,7 +23,7 @@ mongoose
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
-  // Routes
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes); // Added chat routes
 

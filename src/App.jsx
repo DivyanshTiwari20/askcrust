@@ -57,8 +57,8 @@ function ChatApp() {
               color: theme === 'dark' ? 'white' : 'black' 
             }}>
               <div className="card-header d-flex justify-content-between align-items-center">
-                <h5 className="mb-0">Crustdata API Support</h5>
-                <ThemeToggle theme={theme} onToggle={toggleTheme} />
+                <h5 className="mb-0 my-2">Crustdata API Support</h5>
+                {/* <ThemeToggle theme={theme} onToggle={toggleTheme} /> */}
               </div>
               <ChatContainer 
                 messages={messages}

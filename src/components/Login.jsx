@@ -1,10 +1,11 @@
-// Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Navbar';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -18,12 +19,13 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('api/auth/login', formData);
-      localStorage.setItem('token', res.data.token);
-      // Redirect to chat page or dashboard
+      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      if (res.data.token) {
+        localStorage.setItem('token', res.data.token);
+        navigate('/'); // Redirect to home page
+      }
     } catch (err) {
-      console.error(err.response.data);
-      alert(err.response.data.msg || 'An error occurred'); // Display error to the user
+      alert(err.response?.data?.msg || 'Invalid credentials');
     }
   };
 
